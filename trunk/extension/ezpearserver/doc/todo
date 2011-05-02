@@ -1,10 +1,15 @@
 TO DO:
 ======
 
+
 InstallSide
 ~~~~~~~~~~~
-. pear task (php script) that will install a pear-packaged ezp package
+. pear role (php script) that will install a pear-packaged ezp package
 . bundle it as pear package itself (use ezextbuilder for the packaging?)
+
+. investigate use of file-task / postinstall script for that instead of role ?
+
+. investigate more advanced use of roles to bypass the package-in-package limitation
 
 
 ServerSide
