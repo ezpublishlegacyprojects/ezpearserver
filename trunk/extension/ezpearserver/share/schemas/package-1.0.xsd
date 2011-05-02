@@ -100,10 +100,10 @@
         <xsd:sequence>
           <xsd:element name="entry" maxOccurs="unbounded">
             <xsd:complexType>
-              <xsd:attribute name="timestamp" type="xsd:unsignedInt" use="required"/><!-- @todo -->
+              <xsd:attribute name="timestamp" type="xsd:unsignedInt" use="required"/><!-- @todo better type? -->
               <xsd:attribute name="person" type="xsd:string" use="required"/>
               <xsd:attribute name="email" type="EmailAddress" use="required"/>
-              <xsd:attribute name="release" type="xsd:string" use="required"/><!-- @todo -->
+              <xsd:attribute name="release" type="xsd:string" use="required"/><!-- @todo regexp limitation? regexp limitation? -->
             </xsd:complexType>
           </xsd:element>
         </xsd:sequence>
@@ -115,8 +115,8 @@
     <xsd:element name="version">
       <xsd:complexType>
         <xsd:sequence>
-          <xsd:element name="number" type="xsd:string"/><!-- @todo -->
-          <xsd:element name="release" type="xsd:string"/><!-- @todo -->
+          <xsd:element name="number" type="xsd:string"/><!-- @todo regexp limitation? -->
+          <xsd:element name="release" type="xsd:string"/><!-- @todo regexp limitation? -->
         </xsd:sequence>
       </xsd:complexType>
     </xsd:element>
