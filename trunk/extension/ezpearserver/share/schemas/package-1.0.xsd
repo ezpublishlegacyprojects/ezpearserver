@@ -76,7 +76,7 @@
     <xsd:element name="packaging">
       <xsd:complexType>
         <xsd:sequence>
-        <xsd:element name="timestamp" type="xsd:int"/><!-- @todo better type? -->
+        <xsd:element name="timestamp" type="xsd:unsignedInt"/><!-- @todo better type? -->
         <xsd:element name="host" type="xsd:string"/>
         </xsd:sequence>
       </xsd:complexType>
@@ -87,7 +87,7 @@
         <xsd:sequence>
           <xsd:element name="document" maxOccurs="unbounded">
             <xsd:complexType>
-              <xsd:attribute name="mime-type" type="xsd:int" use="required"/><!-- @todo -->
+              <xsd:attribute name="mime-type" type="xsd:string" use="required"/><!-- @todo -->
               <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
@@ -100,7 +100,7 @@
         <xsd:sequence>
           <xsd:element name="entry" maxOccurs="unbounded">
             <xsd:complexType>
-              <xsd:attribute name="timestamp" type="xsd:int" use="required"/><!-- @todo -->
+              <xsd:attribute name="timestamp" type="xsd:unsignedInt" use="required"/><!-- @todo -->
               <xsd:attribute name="person" type="xsd:string" use="required"/>
               <xsd:attribute name="email" type="EmailAddress" use="required"/>
               <xsd:attribute name="release" type="xsd:string" use="required"/><!-- @todo -->
@@ -176,6 +176,12 @@
   <xsd:annotation>
     <xsd:documentation>
       Email address (taken from the "XML Schema Standard Type Library").
+
+      Copyright (C) 2006 Code Synthesis Tools CC
+
+      Redistribution and use with or without modification are permitted
+      under the terms of the new BSD license. See the accompanying LICENSE
+      file.
     </xsd:documentation>
   </xsd:annotation>
   <xsd:restriction base="xsd:string">
