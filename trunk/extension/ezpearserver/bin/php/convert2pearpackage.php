@@ -27,8 +27,8 @@ if ( count( $options['arguments'] ) < 2 )
     $script->shutdown( 1 );
 }
 
-$infile = $options['arguments'][1];
-$outfile = $options['arguments'][2];
+$infile = $options['arguments'][0];
+$outfile = $options['arguments'][1];
 
 
 switch( @$options['format'] )
@@ -55,6 +55,7 @@ switch( @$options['format'] )
         break;
 }
 
+require_once( "kernel/common/template.php" );
 $tpl = templateInit();
 $tpl->setVariable( 'package', $pear_package );
 $result = $tpl->fetch( "design:pear/releases/package.x.y.z.xml.tpl" );
