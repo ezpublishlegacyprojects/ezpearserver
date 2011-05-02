@@ -7,64 +7,64 @@
   version="2.1"
   xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.1 http://pear.php.net/dtd/package-2.1.xsd">
 
-    <name>{$package.name|xmlwash()}</name>
+    <name>{$package.name|washxml()}</name>
 
     {* @todo support having uri instead of channel <uri></uri> *}
-    <channel>{$package.channel|xmlwash()}</channel> {* alternative: uri *}
+    <channel>{$package.channel|washxml()}</channel> {* alternative: uri *}
 
     {* @todo <extends></extends> *}
 
-    <summary>{$package.summary|xmlwash()}</summary>
-    <description>{$package.description|xmlwash()}</description>
+    <summary>{$package.summary|washxml()}</summary>
+    <description>{$package.description|washxml()}</description>
 
     {foreach $package.leads as $lead}
     <lead>
-        <name>{$lead.name|xmlwash()}</name>
-        <user>{$lead.user|xmlwash()}</user>
-        <email>{$lead.email|xmlwash()}</email>
+        <name>{$lead.name|washxml()}</name>
+        <user>{$lead.user|washxml()}</user>
+        <email>{$lead.email|washxml()}</email>
         <active>{if $lead.active}yes{else}no{/if}</active>
     </lead>
 
     {/foreach}
     {foreach $package.developers as $dev}
     <developer>
-        <name>{$dev.name|xmlwash()}</name>
-        <user>{$dev.user|xmlwash()}</user>
-        <email>{$dev.email|xmlwash()}</email>
+        <name>{$dev.name|washxml()}</name>
+        <user>{$dev.user|washxml()}</user>
+        <email>{$dev.email|washxml()}</email>
         <active>{if $dev.active}yes{else}no{/if}</active>
     </developer>
 
     {/foreach}
     {foreach $package.contributors as $cont}
     <contributor>
-        <name>{$cont.name|xmlwash()}</name>
-        <user>{$cont.user|xmlwash()}</user>
-        <email>{$cont.email|xmlwash()}</email>
+        <name>{$cont.name|washxml()}</name>
+        <user>{$cont.user|washxml()}</user>
+        <email>{$cont.email|washxml()}</email>
         <active>{if $cont.active}yes{else}no{/if}</active>
     </contributor>
 
     {/foreach}
     {foreach $package.helpers as $help}
     <helper>
-        <name>{$help.name|xmlwash()}</name>
-        <user>{$help.user|xmlwash()}</user>
-        <email>{$help.email|xmlwash()}</email>
+        <name>{$help.name|washxml()}</name>
+        <user>{$help.user|washxml()}</user>
+        <email>{$help.email|washxml()}</email>
         <active>{if $help.active}yes{else}no{/if}</active>
     </helper>
 
     {/foreach}
 
-    <date>{* @todo ... *}</date>
+    <date>{$package.date|datetime('custom', '%Y-%m-%d')}</date>
     <version>
-        <release>{$package.version.release|xmlwash()}</release>
-        <api>{$package.version.api|xmlwash()}</api>
+        <release>{$package.version.release|washxml()}</release>
+        <api>{$package.version.api|washxml()}</api>
     </version>
     <stability>
-        <release>{$package.stability.release|xmlwash()}</release>{* snapshot devel alpha beta stable *}
-        <api>{$package.stability.api|xmlwash()}</api>{* devel alpha beta stable *}
+        <release>{$package.stability.release|washxml()}</release>{* snapshot devel alpha beta stable *}
+        <api>{$package.stability.api|washxml()}</api>{* devel alpha beta stable *}
     </stability>
-    <license {* @todo uri=""... *}{* @todo filesource=""... *}>{$package.license|xmlwash()}</license>
-    <notes>{$package.notes|xmlwash()}</notes>
+    <license {* @todo uri=""... *}{* @todo filesource=""... *}>{$package.license|washxml()}</license>
+    <notes>{$package.notes|washxml()}</notes>
 
     <contents>
     <!-- "<contents> is used to describe the contents of a tarball. Nothing further.
@@ -73,76 +73,9 @@
          This fact can be used to create a very versatile tarball, one that can
          be directly unzipped and work out of the box as well as be installed by
          the PEAR installer and work out of the box." -->
-        {foreach $package.contents as $dir}
-        <dir name="{$dir.name|washxml()}" {* @todo baseinstalldir="ext/$extname" ? *}>
-            {* @todo recurse dirs ... *}
-            {foreach $dir.files as $file}
-            <file role="{$file.role|washxml()}" {* @todo baseinstalldir="/" *} name="{$file.name|washxml()}" md5sum="{$file.md5sum}">
-                {if $file.postinstallscript|count()}
-                <tasks:postinstallscript>
-                    {foreach $file.postinstallscript as $id => $group}
-                    <tasks:paramgroup>
-                        <tasks:id>{$id|washxml()}</tasks:id>
-                        {if {$group.instructions}<tasks:instructions>{$group.instructions|washxml()}</tasks:instructions>{/if}
-                        {foreach $group.params as $param}
-                        <tasks:param>
-                            <tasks:name>{$param.name|washxml()}</tasks:name>
-                            <tasks:prompt>{$param.prompt|washxml()}</tasks:prompt>
-                            <tasks:type>{$param.type|washxml()}</tasks:type>
-                        </tasks:param>
-
-                        {/foreach}
-                    </tasks:paramgroup>
-
-                    {/foreach}
-                </tasks:postinstallscript>
-                {elseif $file.tasks|count()}
-                {foreach $file.postinstallscript as $id => $group}
-                    {* @todo ... *}
-                {/foreach}
-                {/if}
-            </file>
-
-            {/foreach}
-        </dir>
-
+        {foreach $package.contents as $topdir}
+            {include uri='design:pear/releases/package_dir.tpl' dir=$topdir}
         {/foreach}
-
-        {* sample file description stuff
-
-            <file role="script" baseinstalldir="/" name="bin/pake.sh" md5sum="">
-                <!-- replace text in file -->
-                <tasks:replace type="pear-config" from="@PHP-BIN@" to="php_bin"/>
-            </file>
-
-            <file role="php" baseinstalldir="/" name="bin/pake.php" md5sum=""/>
-
-            <dir name="lib">
-                <dir name="pake">
-                    <file role="php" name="pakeApp.class.php">
-                        <tasks:replace type="package-info" from="1.0.DEV" to="version"/>
-                    </file>
-                    ##CLASS_FILES##
-                    <dir name="tasks">
-                        ##TASK_FILES##
-                    </dir>
-                </dir>
-            </dir>
-
-            <file role="doc" baseinstalldir="/" name="LICENSE"/>
-
-            <!-- defining a custom task -->
-            <file role="php" baseinstalldir="/bin/php" name="task.php"/>
-             <tasks:paramgroup>
-              <tasks:id>first</tasks:id>
-              <tasks:param>
-               <tasks:name>test</tasks:name>
-               <tasks:prompt>Testing Thingy</tasks:prompt>
-               <tasks:type>string</tasks:type>
-              </tasks:param>
-             </tasks:paramgroup>
-            </tasks:postinstallscript>
-            </file>*}
     </contents>
 
     <dependencies>
@@ -157,6 +90,7 @@
                 {foreach $dep.exclude as $exclude}
                 <exclude>{$dep.exclude|washxml}</exclude>
                 {/foreach}
+                {/if}
             </php>
             <pearinstaller>{* nb: required *}
                 {set $dep = $package.dependencies.pearinstaller}
@@ -168,6 +102,7 @@
                 {foreach $dep.exclude as $exclude}
                 <exclude>{$dep.exclude|washxml}</exclude>
                 {/foreach}
+                {/if}
             </pearinstaller>
             {foreach $package.dependencies.required.packages as $dep}
             <package>{* pear package *}
@@ -193,6 +128,15 @@
             </package>
 
             {/foreach}
+
+            {* always depend on ezpearinstaller package *}
+            {* @todo do not add this if ezpearinstaller listed in $package.dependencies.required.packages *}
+            {if ne($package.name, 'ezpearinstaller')}
+            <package>
+                <name>ezpearinstaller</name>
+                <channel>share.ez.no</channel>
+            </package>
+            {/if}
 
             {* <subpackage></subpackage> *}
 
@@ -296,12 +240,13 @@
     </usesrole>-->
 
     <!-- custom tasks for our files -->
-    <usestask>
+    <!-- see http://pear.php.net/manual/en/guide.developers.package2.usestask. -->
+    <!--<usestask>
       <task>installeZPackage</task>
       <package>eZPearClient</package>
       <channel>share.ez.no</channel>
     </usestask>
-    <!--<usestask>
+    <usestask>
       <task>installeZContentObject</task>
       <package>eZPearClient</package>
       <channel>share.ez.no</channel>
@@ -335,20 +280,20 @@
     <changelog>
         {foreach $package.changelog as $release}
             <release>
-            <date>{$release.date|xmlwash()}</date>{* @todo format date instead! *}
+            <date>{$release.date|washxml()}</date>{* @todo format date instead! *}
             {* optional: time *}
             {* optional: lead 0..n *}
             {* optional: developer 0..n *}
             <version>
-                <release>{$release.version.release|xmlwash()}</release>
-                <api>{$release.version.api|xmlwash()}</api>
+                <release>{$release.version.release|washxml()}</release>
+                <api>{$release.version.api|washxml()}</api>
             </version>
             <stability>
-                <release>{$release.stability.release|xmlwash()}</release>
-                <api>{$release.stability.api|xmlwash()}</api>
+                <release>{$release.stability.release|washxml()}</release>
+                <api>{$release.stability.api|washxml()}</api>
             </stability>
-            <license uri="{* @todo... *}" filesource="{* @todo ... *}">{$release.license|xmlwash()}</license>
-            <notes>{$release.notes|xmlwash()}</notes>
+            <license uri="{* @todo... *}" filesource="{* @todo ... *}">{$release.license|washxml()}</license>
+            <notes>{$release.notes|washxml()}</notes>
         </release>
 
         {/foreach}
