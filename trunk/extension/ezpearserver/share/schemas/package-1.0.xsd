@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://ez.no/package-1.0"
+  targetNamespace="http://ez.no/package-1.0"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified"
+  xml:lang="en">
+
+  <xsd:annotation>
+    <xsd:documentation>
+     Schema for eZ Publish package description files
+     Copyright 2011 eZ Systems.
+    </xsd:documentation>
+  </xsd:annotation>
+
+  <xsd:element name="package">
+  <xsd:complexType>
+   <xsd:sequence>
+
+    <xsd:element name="name" type="xsd:string"/>
+
+    <xsd:element name="summary" type="xsd:string"/>
+
+    <xsd:element name="description" type="xsd:string"/>
+
+    <xsd:element name="vendor" type="xsd:string"/>
+
+    <xsd:element name="type">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="contentclass"/>
+          <xsd:enumeration value="contentobject"/>
+          <xsd:enumeration value="site"/>
+          <xsd:enumeration value="sitestyle"/>
+          <xsd:enumeration value="extension"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="ezpublish">
+      <xsd:complexType>
+        <xsd:sequence>
+        <xsd:element name="version" type="xsd:string"/><!-- @todo regexp limitation? -->
+        <xsd:element name="named-version" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="maintainers">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="maintainer" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="name" type="xsd:string"/>
+                <xsd:element name="email" type="EmailAddress"/>
+                <xsd:element name="role">
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                      <xsd:enumeration value="developer"/>
+                      <xsd:enumeration value="designer"/>
+                      <xsd:enumeration value="contributor"/>
+                      <xsd:enumeration value="tester"/>
+                      <xsd:enumeration value="lead"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="packaging">
+      <xsd:complexType>
+        <xsd:sequence>
+        <xsd:element name="timestamp" type="xsd:int"/><!-- @todo better type? -->
+        <xsd:element name="host" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="documents">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="document" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:attribute name="mime-type" type="xsd:int" use="required"/><!-- @todo -->
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="changelog">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="entry" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:attribute name="timestamp" type="xsd:int" use="required"/><!-- @todo -->
+              <xsd:attribute name="person" type="xsd:string" use="required"/>
+              <xsd:attribute name="email" type="EmailAddress" use="required"/>
+              <xsd:attribute name="release" type="xsd:string" use="required"/><!-- @todo -->
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="simple-files"/><!-- @todo -->
+
+    <xsd:element name="version">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="number" type="xsd:string"/><!-- @todo -->
+          <xsd:element name="release" type="xsd:string"/><!-- @todo -->
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="licence" type="xsd:string" />
+
+    <xsd:element name="state">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="alpha"/>
+          <xsd:enumeration value="beta"/>
+          <xsd:enumeration value="stable"/>
+        </xsd:restriction>
+     </xsd:simpleType>
+    </xsd:element>
+
+    <xsd:element name="dependencies">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="provides" maxOccurs="unbounded"/><!-- @todo -->
+          <xsd:element name="requires" maxOccurs="unbounded"/><!-- @todo -->
+          <xsd:element name="obsoletes" maxOccurs="unbounded"/><!-- @todo -->
+          <xsd:element name="conflicts" maxOccurs="unbounded"/><!-- @todo -->
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="install">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element ref="item" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="uninstall">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element ref="item" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+
+   </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+
+<xsd:element name="item">
+ <xsd:complexType>
+   <xsd:attribute name="type" type="xsd:string" use="required"/><!-- @todo -->
+   <xsd:attribute name="filename" type="xsd:string" use="required"/>
+   <xsd:attribute name="subdirectory" type="xsd:string" use="required"/>
+  </xsd:complexType>
+</xsd:element>
+
+<xsd:simpleType name="EmailAddress">
+  <xsd:annotation>
+    <xsd:documentation>
+      Email address (taken from the "XML Schema Standard Type Library").
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:restriction base="xsd:string">
+    <xsd:pattern value="([a-zA-Z0-9_\-])([a-zA-Z0-9_\-\.]*)@(\[((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\.){3}|((([a-zA-Z0-9\-]+)\.)+))([a-zA-Z]{2,}|(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\])"/>
+  </xsd:restriction>
+</xsd:simpleType>
+
+</xsd:schema>
