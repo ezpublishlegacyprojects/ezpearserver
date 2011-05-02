@@ -1,6 +1,15 @@
 TO DO:
 ======
 
+InstallSide
+~~~~~~~~~~~
+. pear task (php script) that will install a pear-packaged ezp package
+. bundle it as pear package itself (use ezextbuilder for the packaging?)
+
+
+ServerSide
+~~~~~~~~~~
+
 PHASE 1:
 --------
 . implement channelname() tpl operator (allows an ini value to override SiteURL) ?
