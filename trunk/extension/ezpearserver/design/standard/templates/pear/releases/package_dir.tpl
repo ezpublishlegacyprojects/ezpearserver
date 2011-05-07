@@ -7,7 +7,7 @@
         {include uri='design:pear/releases/package_dir.tpl' dir=$subdir}
     {/foreach}
     {foreach $dir.files as $file}
-    <file role="{$file.role|washxml()}"{if $file.baseinstalldir} baseinstalldir="{$file.baseinstalldir|washxml}"{/if} name="{$file.name|washxml()}" md5sum="{$file.md5sum}">
+    <file role="{$file.role|washxml()}"{if $file.baseinstalldir} baseinstalldir="{$file.baseinstalldir|washxml}"{/if} name="{$file.name|washxml()}"{if $file.md5sum} md5sum="{$file.md5sum}"{/if}>
         {if $file.postinstallscript|count()}
         <tasks:postinstallscript>
             {foreach $file.postinstallscript as $id => $group}

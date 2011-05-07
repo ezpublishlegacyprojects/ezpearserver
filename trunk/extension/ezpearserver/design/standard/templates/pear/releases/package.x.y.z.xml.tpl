@@ -176,6 +176,7 @@
             *}
         </required>
 
+        {if or($package.dependencies.optional.packages|count(), $package.dependencies.optional.extensions|count())}
         <optional>
             {foreach $package.dependencies.optional.packages as $dep}
             <package>{* pear package *}
@@ -219,16 +220,17 @@
 
             {/foreach}
         </optional>
+        {/if}
     </dependencies>
 
     {if ne($package.name, 'ezpearinstaller')}
     <!-- custom file roles for our custom tasks -->
     <usesrole>
         <role>ezcontpackage</role>
-        <package>eZPearServer</package>
+        <package>ezpearinstaller</package>
         <channel>share.ez.no</channel>
     </usesrole>
-    <!--<usesrole>
+    {*<usesrole>
         <role>ezcontclass</role>
         <package>eZPearServer</package>
         <channel>share.ez.no</channel>
@@ -237,9 +239,9 @@
         <role>ezcontobject</role>
         <package>eZPearServer</package>
         <channel>share.ez.no</channel>
-    </usesrole>-->
+    </usesrole>*}
 
-    <!-- custom tasks for our files -->
+    {*<!-- custom tasks for our files -->
     <!-- see http://pear.php.net/manual/en/guide.developers.package2.usestask. -->
     <!--<usestask>
       <task>installeZPackage</task>
@@ -255,7 +257,7 @@
       <task>installeZContentClass</task>
       <package>eZPearClient</package>
       <channel>share.ez.no</channel>
-    </usestask>-->
+    </usestask>-->*}
     {/if}
 
     <phprelease>
@@ -265,10 +267,11 @@
             </os>
         </installconditions>*}
         <filelist>
-            {* @todo
-            <install as="pake.bat" name="bin/pake.bat"/>
-            ...
+            {foreach $package.phprelease.filelist as $file}
+            <install as="{$file.as|washxml}" name="{$file.name|washxml}"/>
 
+            {/foreach}
+            {* @todo
             <ignore name="bin/pake.sh"/>
             ...*}
         </filelist>
