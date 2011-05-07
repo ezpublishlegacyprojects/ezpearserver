@@ -10,6 +10,7 @@ PHASE 1:
 
 . pear role (php script) that will install a pear-repackaged ezp package
   => test it with a real eZP package file
+  => test it with php 5.1 / pear 1.4.1
 
 . bundle it as pear package itself: OK
 
@@ -19,15 +20,19 @@ PHASE 1:
 
 . investigate usage of 'pear upgrade' command to upgrade package
 
+. prepare pear package of full ezp
+
 PHASE 2:
 --------
 
-. investigate use of file-task / postinstall script for that instead of role ?
+. investigate usage of file-task / postinstall script instead of file-role
   => waiting for answers from pear's mailing lists
 
 . investigate more advanced use of roles/tasks to bypass the package-in-package limitation and use a real pear zipped package
 
 . investigate usage of signed packages
+
+. admin GUI to browse pear servers
 
 
 ServerSide
@@ -49,8 +54,7 @@ PHASE 1:
 PHASE 2:
 --------
 . html views besides the rest views (q: shall we implement this instead in a client extension such as ezextensioninstaller?)
-. conversion scripts from ez package xmls to pear xmls
-. invoking post-extraction tasks that hook into existing ez code
+. conversion scripts from ez package xmls to pear xmls (integrate in ezextensionbuilder?)
 
 PHASE 3:
 --------
@@ -58,52 +62,3 @@ PHASE 3:
 
 . implement xmlrpc API? (see http://pear.php.net/manual/en/guide.migrating.channels.xmlrpcfunctions.php)
   note: it is deprecated by PEAR itself, so...
-
-NOTES:
-------
-extra info not found in pear package:
-- package/install_type
-- vendor
-- type
-- provides
-- obsoletes (might be there in fact)
-- conflicts
-- role: ezcontentclass/... (might be replicated with custom roles?)
-- packaging date + host
-- uninstall list
-- release number: packages always start at ...-1
-- ezp version requirement (fulfilled via package nr?)
-
-ideas:
-- manage all of thi using custom file roles / tasks
-- alterative: store extra info using an ezp namespace, use direct access to xml to finish install/deinstall tasks
-
-info missing in ez package:
-- api nr
-
-INVESTIGATION:
-==============
-
-Advantages:
-- repository management (browsing/) already developed
-- can profit of pear tooling - installed by default on every php system - pear instal XXX
-- brings eZ closer to the php community
-- right time to change package format, since the package installation system is revamped (ie. now or never)
-
-Disavantages:
-- needs two namespaces in package xml file to have enough flexibility
-- not complete control over pear package format
-- missing some features (in repository management/install-deinstall management) ?
-- need to reimplement existing functionality
-
-Q: how to manage extensions available for eZP version X ?
-A: manage either via requirements in packages or via different channels?
-See eg. how debian does it => different channels for every debian release
-
-Managing channels "a la debian"
-- pros: easier to list all extensions available for eZP version X
-- cons: have to rebuild all packages every 6 months
-
-Managing a single channels "with dependencies" (one pear channel for share.ez.no, different releases of packages require different ez versions)
-- pros:
-- cons: harder to browse/search for packages available for eZP version X?

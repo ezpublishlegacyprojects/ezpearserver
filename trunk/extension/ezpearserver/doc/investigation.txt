@@ -1,0 +1,66 @@
+USING PEAR FOR EZ PACKAGING:
+============================
+
+Advantages:
+-----------
+- repository management (browsing/) is already developed & more advanced than ez one
+- can profit of pear tools - installed by default on every php system: "pear install XXX"
+- right time to change package format, since the package installation system is revamped (ie. now or never)
+- brings eZ closer to the php community
+
+Disavantages:
+-------------
+- missing some features (in repository management/install-deinstall-upgrade management) ?
+- packages are still registered in two repositories locally (ezp and pear): can get out of sync
+- need to reimplement existing functionality (?)
+  eg. the admin pages to install packages from remote ez repos should use remote pear repos
+- not complete control over pear package format (not an issue as long as package-in-package approach is used)
+
+Proposal:
+---------
+1st phase: use ezp packages wrapped in a pear package.
+
+Open issues:
+------------
+- can pear execute uninstall scripts when deinstalling a pear-wrapped ez-package?
+- declaring an extension to need 'ez enterprise 4.5 OR community 2011.4'
+- allowing pear to install ezp extensions into many different ezps
+- allowing to manage a partly-pearized situation (eg. ezp installed but not as pear package)
+- one pear channel for all extensions or one pear channel per ezp version?
+
+Notes:
+------
+Extra info in ez package not found in pear package:
+- package/install_type
+- vendor
+- type
+- provides
+- obsoletes (might be there in fact)
+- conflicts
+- role: ezcontentclass/... (might be replicated with custom roles?)
+- packaging date + host
+- uninstall list
+- release number: packages always start at ...-1
+- ezp version requirement (fulfilled via package nr?)
+
+Info missing in ez package:
+- api nr
+
+
+Ideas:
+- manage all of this using custom file roles / tasks
+- alterative: store extra info using an ezp namespace, use direct access to xml to finish install/deinstall tasks
+- alternative 2: store extra info in another xml file in the package tarball
+
+
+Q: how to manage extensions available for eZP version X ?
+A: manage either via requirements in packages or via different channels?
+See eg. how debian does it => different channels for every debian release
+
+Managing channels "a la debian"
+- pros: easier to list all extensions available for eZP version X
+- cons: have to rebuild all packages every 6 months
+
+Managing a single channels "with dependencies" (one pear channel for share.ez.no, different releases of packages require different ez versions)
+- pros:
+- cons: harder to browse/search for packages available for eZP version X?
