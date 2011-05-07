@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<role version="1.0">
+ <releasetypes>php</releasetypes>
+ <installable>0</installable>
+ <locationconfig>temp_dir</locationconfig><!-- let package only be copied to tmp dir -->
+ <honorsbaseinstall /><!-- do NOT honor the "baseinstalldir" attribute -->
+ <unusualbaseinstall />
+ <phpfile />
+ <executable />
+ <phpextension />
+ <config_vars><!-- this config var we need -->
+  <ezpublish_dir>
+   <type>directory</type>
+   <default><www_dir/><constant>DIRECTORY_SEPARATOR</constant><text>ezpublish</text></default>
+   <doc>directory where eZ Publish is installed</doc>
+   <prompt>eZ Publish root directory</prompt>
+   <group>File Locations</group>
+  </ezpublish_dir>
+ </config_vars>
+</role>
