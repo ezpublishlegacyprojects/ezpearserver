@@ -52,6 +52,20 @@ switch( @$options['format'] )
             $script->shutdown( 1 );
         }
         $pear_package = eZPearPackageManager::fromeZPackage( $package );
+
+        // inject into package definition the ez package file itself
+        $pear_package['contents'] = array(
+            array(
+                'name' => '/',
+                'dirs' => array(),
+                'files' => array(
+                    array(
+                        'name' => $infile,
+                        'role' => 'ezpackage'
+                    )
+                )
+            )
+        );
         break;
 }
 
