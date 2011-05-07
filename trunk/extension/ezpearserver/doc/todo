@@ -4,12 +4,30 @@ TO DO:
 
 InstallSide
 ~~~~~~~~~~~
-. pear role (php script) that will install a pear-packaged ezp package
-. bundle it as pear package itself (use ezextbuilder for the packaging?)
+
+PHASE 1:
+--------
+
+. pear role (php script) that will install a pear-repackaged ezp package
+  => test it with a real eZP package file
+
+. bundle it as pear package itself: OK
+
+. distribute it via share.ez.no pear channel
+
+. investigate potential usage of 'pear uninstall' command to uninstall package
+
+. investigate usage of 'pear upgrade' command to upgrade package
+
+PHASE 2:
+--------
 
 . investigate use of file-task / postinstall script for that instead of role ?
+  => waiting for answers from pear's mailing lists
 
-. investigate more advanced use of roles to bypass the package-in-package limitation
+. investigate more advanced use of roles/tasks to bypass the package-in-package limitation and use a real pear zipped package
+
+. investigate usage of signed packages
 
 
 ServerSide
@@ -26,17 +44,17 @@ PHASE 1:
 
 . implement REST api (using views) ...
 
-. content classes (or ezpersistentopbjects? => use 2 handlers for retrieving stuff...) used to define packages/categories/versions
+. content classes (or ezpersistentopbjects? => use 2 separate handlers for retrieving stuff...) used to define packages/categories/versions
 
 PHASE 2:
 --------
-. html views besides the rest views (q: shall we implement this in a client extension such as ezextensioninstaller?)
+. html views besides the rest views (q: shall we implement this instead in a client extension such as ezextensioninstaller?)
 . conversion scripts from ez package xmls to pear xmls
-. invoking post-extraction tasks that hook into existing code
+. invoking post-extraction tasks that hook into existing ez code
 
 PHASE 3:
 --------
-. implement REST api using ggws/ezrest
+. implement REST api using ggws/ezrest instead of views/templates ?
 
 . implement xmlrpc API? (see http://pear.php.net/manual/en/guide.migrating.channels.xmlrpcfunctions.php)
   note: it is deprecated by PEAR itself, so...
@@ -48,15 +66,17 @@ extra info not found in pear package:
 - vendor
 - type
 - provides
-- obsoletes
+- obsoletes (might be there in fact)
 - conflicts
-- role: ezcontentclass/...
+- role: ezcontentclass/... (might be replicated with custom roles?)
 - packaging date + host
 - uninstall list
-- release number: packages always start at ..-1
+- release number: packages always start at ...-1
 - ezp version requirement (fulfilled via package nr?)
 
-ideas: store extra info using an ezp namespace, use direct access to xml to finish install/deinstall tasks
+ideas:
+- manage all of thi using custom file roles / tasks
+- alterative: store extra info using an ezp namespace, use direct access to xml to finish install/deinstall tasks
 
 info missing in ez package:
 - api nr
