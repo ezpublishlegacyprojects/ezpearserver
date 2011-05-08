@@ -224,7 +224,9 @@
     </dependencies>
 
     {if ne($package.name, 'ezpearinstaller')}
-    <!-- custom file roles for our custom tasks -->
+    <!-- custom file roles for our files -->
+    {* @see http://pear.php.net/manual/en/guide.developers.package2.usesrole,
+             http://pear.php.net/manual/en/guide.migrating.customroles *}
     <usesrole>
         <role>ezcontpackage</role>
         <package>ezpearinstaller</package>
@@ -241,14 +243,15 @@
         <channel>share.ez.no</channel>
     </usesrole>*}
 
-    {*<!-- custom tasks for our files -->
-    <!-- see http://pear.php.net/manual/en/guide.developers.package2.usestask. -->
-    <!--<usestask>
-      <task>installeZPackage</task>
-      <package>eZPearClient</package>
+    <!-- custom tasks for our files -->
+    {* @see http://pear.php.net/manual/en/guide.developers.package2.usestask,
+             http://pear.php.net/manual/en/guide.migrating.customtasks *}
+    <usestask>
+      <task>ezupgradescript</task>
+      <package>ezpearinstaller</package>
       <channel>share.ez.no</channel>
     </usestask>
-    <usestask>
+    {*<usestask>
       <task>installeZContentObject</task>
       <package>eZPearClient</package>
       <channel>share.ez.no</channel>

@@ -28,17 +28,21 @@ return array(
             'dirs' => array(),
             'files' => array(
                 // TASKS
-
+                array(
+                    'name' => 'extension/ezpearserver/classes/peartasks/Ezupgradescript.php',
+                    'role' => 'php',
+                    'baseinstalldir' => 'PEAR/Task'
+                ),
                 // POST INSTALL SCRIPTS
 
                 // ROLES
                 array(
-                    'name' => 'extension/ezpearserver/classes/pearroles/ezpackage.php',
+                    'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.php',
                     'role' => 'php',
                     'baseinstalldir' => 'PEAR/Installer/Role'
                 ),
                 array(
-                    'name' => 'extension/ezpearserver/classes/pearroles/ezpackage.xml',
+                    'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.xml',
                     'role' => 'php',
                     'baseinstalldir' => 'PEAR/Installer/Role'
                 ),
@@ -63,8 +67,9 @@ return array(
     ),
     'phprelease' => array(
         'filelist' => array(
-            array( 'name' => 'extension/ezpearserver/classes/pearroles/ezpackage.php', 'as' =>'ezpackage.php' ),
-            array( 'name' => 'extension/ezpearserver/classes/pearroles/ezpackage.php', 'as' =>'ezpackage.xml' ),
+            array( 'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.php', 'as' =>'Ezpackage.php' ),
+            array( 'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.php', 'as' =>'Ezpackage.xml' ),
+            array( 'name' => 'extension/ezpearserver/classes/peartasks/Ezupgradescript.php', 'as' =>'Ezupgradescript.php' ),
         )
     ),
     'dependencies' => array(
