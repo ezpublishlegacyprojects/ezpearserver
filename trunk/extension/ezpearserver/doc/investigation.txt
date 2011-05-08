@@ -25,12 +25,18 @@ Proposal:
 Open issues:
 ------------
 - can pear execute uninstall scripts when deinstalling a pear-wrapped ez-package?
+- can pear execute upgrade scripts when upgrading ezp from version X to version Y?
 - declaring an extension to need 'ez enterprise 4.5 OR community 2011.4'
   (same on ezp depending on extension mysql or mysqli or pgsql)
+- allowing pear to install multiple ezps in different dirs, possibily at different versions ?
 - allowing pear to install ezp extensions into many different ezps
 - allowing to manage a partly-pearized situation (eg. ezp installed but not as pear package)
 - one pear channel for all extensions or one pear channel per ezp version?
 - name of the community channel: share.ez.no, projects.ez.no, community.ez.no?
+- the ezp package should install itself into www/ or in www/releasename/ ?
+  if 1, it is hard to install 2 versions in parallel
+  if 2, it is hard to upgrade from one version to the other
+  nb: if 1, manipulating the www dir config var can still allow different installs
 
 Notes:
 ------

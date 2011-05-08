@@ -6,7 +6,7 @@ To install eZP & extensions using pear:
 1. add the share.ez.no channel to your pear configuration
 2. install the ezpearinstaller package (from the share.ez.no channel)
 3. install the ezpublish_community_project package
-4. set the pear configuration var ezpublish_dir
+4. set the pear configuration var "ezpublish_dir"
 5. install extension packages
 
 To build the ezpearinstaller package:
@@ -21,11 +21,11 @@ To build the ezpearinstaller package:
 
 To build the ezpublish_community_project package:
 -------------------------------------------------
-1. configure version nr. etc... in extension/ezpearinstaller/pake/ezpublishdef.php
-2. copy the ezp release in a subfolder of eZP install root dir, eg: ezpublish-4.2011-cp
-3. from root of eZP install, run::
+1. prepare a dir with the target eZP release, and an eZP installation with this extension ("work installation")
+2. configure version nr. etc... in extension/ezpearinstaller/pake/ezpublishdef.php
+3. from root of eZP work installation, run::
    php extension/ezpearinstaller/bin/php/convert2pearpackage.php extension/ezpearinstaller/pake/ezpublishdef.php ezpublish_community_project.xml
-4. copy ezpublish_community_project.xml to the root of the target ezp sources, and run::
+4. copy ezpublish_community_project.xml to the root of the target eZP sources, and run::
    pear package-validate ezpublish_community_project.xml
    pear package ezpublish_community_project.xml
 5. test the installed package (local installation)

@@ -16,11 +16,13 @@ PHASE 1:
 
 . distribute it via share.ez.no pear channel
 
+. prepare pear package of full ezp: OK
+
 . investigate potential usage of 'pear uninstall' command to uninstall package
 
-. investigate usage of 'pear upgrade' command to upgrade package
+. investigate usage of 'pear upgrade' command to upgrade package (custom tasks get the last version nr)
 
-. prepare pear package of full ezp
+
 
 PHASE 2:
 --------
@@ -31,6 +33,8 @@ PHASE 2:
 . investigate more advanced use of roles/tasks to bypass the package-in-package limitation and use a real pear zipped package
 
 . investigate usage of ezc for creating pear package tgz instead of "pear package ezpublishXXX.xml" command: verify time, mem usage differences
+
+. fix: when building an ezp package, ezpearinstaller is not a requirement
 
 . investigate usage of signed packages
 
