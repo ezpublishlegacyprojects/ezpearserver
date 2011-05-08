@@ -19,6 +19,11 @@ while( !is_dir( $rootdir ) )
     }
 }
 
+// scan ezp dir for contents
+$ezpdir = dirscan( $rootdir, '' );
+// fix its 'name', as in the package file it will be wrapped in a dir anyway
+$ezpdir['name'] = '/';
+
 return array(
     'name' => 'ezpublish_community_project',
     'channel' => 'share.ez.no',
@@ -36,13 +41,7 @@ return array(
     'stability' => array( 'release' => 'stable', 'api' => 'stable' ),
     'license' => 'GNU General Public License v2.0',
     'notes' => '1st version to be released as PEAR package',
-    'contents' => array(
-        array(
-            'name' => '/',
-            'dirs' => array( dirscan( $rootdir, '' ) ),
-            'files' => array()
-        )
-    ),
+    'contents' => array( $ezpdir ),
     'phprelease' => array(),
     'dependencies' => array(
         'php' => array( 'min' => '5.2.1' ), /// @todo check min reqs for ezp 4.0
@@ -82,7 +81,10 @@ return array(
     'changelog' => array() /// @todo
 );
 
-/// recursively scan dirs for contents, returning array in proper ezpearpackage format
+/**
+* Recursively scan dirs for contents, returning array in proper ezpearpackage format
+* @todo return a flat 'files' hierarchy instead of a nested dirs hierarchy
+*/
 function dirscan( $rootdir, $rootpath )
 {
     $dirs = array();

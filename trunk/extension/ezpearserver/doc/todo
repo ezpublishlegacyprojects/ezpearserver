@@ -30,6 +30,8 @@ PHASE 2:
 
 . investigate more advanced use of roles/tasks to bypass the package-in-package limitation and use a real pear zipped package
 
+. investigate usage of ezc for creating pear package tgz instead of "pear package ezpublishXXX.xml" command: verify time, mem usage differences
+
 . investigate usage of signed packages
 
 . admin GUI to browse pear servers

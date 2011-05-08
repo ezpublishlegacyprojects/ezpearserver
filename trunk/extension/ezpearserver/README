@@ -25,10 +25,11 @@ To build the ezpublish_community_project package:
 2. copy the ezp release in a subfolder of eZP install root dir, eg: ezpublish-4.2011-cp
 3. from root of eZP install, run::
    php extension/ezpearinstaller/bin/php/convert2pearpackage.php extension/ezpearinstaller/pake/ezpublishdef.php ezpublish_community_project.xml
+4. copy ezpublish_community_project.xml to the root of the target ezp sources, and run::
    pear package-validate ezpublish_community_project.xml
    pear package ezpublish_community_project.xml
-4. test the installed package (local installation)
-5. upload it to share.ez.no
+5. test the installed package (local installation)
+6. upload it to share.ez.no
 
 To build a pear package for an eZP extension:
 ---------------------------------------------
