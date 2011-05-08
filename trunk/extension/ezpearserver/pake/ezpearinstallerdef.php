@@ -68,7 +68,7 @@ return array(
     'phprelease' => array(
         'filelist' => array(
             array( 'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.php', 'as' =>'Ezpackage.php' ),
-            array( 'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.php', 'as' =>'Ezpackage.xml' ),
+            array( 'name' => 'extension/ezpearserver/classes/pearroles/Ezpackage.xml', 'as' =>'Ezpackage.xml' ),
             array( 'name' => 'extension/ezpearserver/classes/peartasks/Ezupgradescript.php', 'as' =>'Ezupgradescript.php' ),
         )
     ),

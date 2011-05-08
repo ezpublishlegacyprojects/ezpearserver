@@ -7,7 +7,7 @@
  */
 
 /// @see http://pear.php.net/manual/en/guide.migrating.customroles.defining.php
-class eZPearInstaller_Installer_Role_eZPackage extends PEAR_Installer_Role_Common
+class PEAR_Installer_Role_eZPackage extends PEAR_Installer_Role_Common
 {
     /**
      * Imports + Installs the eZP package in the file $file
@@ -107,13 +107,6 @@ class eZPearInstaller_Installer_Role_eZPackage extends PEAR_Installer_Role_Commo
     {
         return ( is_dir( $ezpdir ) && is_file( "$ezpdir/autoload.php" ) && is_file( "$ezpdir/index.php" ) );
     }
-}
-
-/**
- * Need this double naming to satisfy both package creation and at install time
- */
-class PEAR_Installer_Role_Ezpackage extends eZPearInstaller_Installer_Role_eZPackage
-{
 }
 
 ?>
