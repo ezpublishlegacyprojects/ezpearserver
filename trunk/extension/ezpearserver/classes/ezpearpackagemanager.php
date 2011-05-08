@@ -1,5 +1,7 @@
 <?php
 /**
+ * Class used to manage PEAR packages
+ *
  * @author G. Giunta
  * @version $Id$
  * @copyright (C) 2011 G. Giunta
@@ -7,6 +9,7 @@
 
 class eZPearPackageManager
 {
+    /// Builds the (array) definition of the PEAR package from an ezxisting ezpackage object
     static function fromeZPackage( $ezpackage )
     {
         $releasenr = $ezpackage->attribute( 'version-number' ) . '.' . $ezpackage->attribute( 'release-number' );

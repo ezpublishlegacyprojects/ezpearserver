@@ -5,7 +5,7 @@
  * @version $Id$
  * @copyright (C) 2011
  *
- * @toso support json as package def format (remember to add it to self def as optional!)
+ * @todo support json as package def format (remember to add it to self def as optional!)
  */
 
 require 'autoload.php';
