@@ -24,7 +24,7 @@
 
     <xsd:element name="description" type="xsd:string"/>
 
-    <xsd:element name="vendor" type="xsd:string"/>
+    <xsd:element name="vendor" type="xsd:string" minOccurs="0"/>
 
     <xsd:element name="type">
       <xsd:simpleType>
@@ -47,7 +47,7 @@
       </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="maintainers">
+    <xsd:element name="maintainers" minOccurs="0">
       <xsd:complexType>
         <xsd:sequence>
           <xsd:element name="maintainer" maxOccurs="unbounded">
@@ -87,7 +87,7 @@
         <xsd:sequence>
           <xsd:element name="document" maxOccurs="unbounded">
             <xsd:complexType>
-              <xsd:attribute name="mime-type" type="xsd:string" use="required"/><!-- @todo -->
+              <xsd:attribute name="mime-type" type="xsd:string" use="required"/><!-- @todo list allowed values? -->
               <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
@@ -95,7 +95,7 @@
       </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="changelog">
+    <xsd:element name="changelog" minOccurs="0">
       <xsd:complexType>
         <xsd:sequence>
           <xsd:element name="entry" maxOccurs="unbounded">
@@ -110,7 +110,13 @@
       </xsd:complexType>
     </xsd:element>
 
-    <xsd:element name="simple-files"/><!-- @todo -->
+    <xsd:element name="simple-files" minOccurs="0">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element ref="simple-file" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
 
     <xsd:element name="version">
       <xsd:complexType>
@@ -136,7 +142,13 @@
     <xsd:element name="dependencies">
       <xsd:complexType>
         <xsd:sequence>
-          <xsd:element name="provides" maxOccurs="unbounded"/><!-- @todo -->
+          <xsd:element name="provides" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="provide" maxOccurs="unbounded"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
           <xsd:element name="requires" maxOccurs="unbounded"/><!-- @todo -->
           <xsd:element name="obsoletes" maxOccurs="unbounded"/><!-- @todo -->
           <xsd:element name="conflicts" maxOccurs="unbounded"/><!-- @todo -->
@@ -166,9 +178,25 @@
 
 <xsd:element name="item">
  <xsd:complexType>
-   <xsd:attribute name="type" type="xsd:string" use="required"/><!-- @todo -->
+   <xsd:attribute name="type" type="xsd:string" use="required"/><!-- @todo list allowed values? -->
    <xsd:attribute name="filename" type="xsd:string" use="required"/>
    <xsd:attribute name="subdirectory" type="xsd:string" use="required"/>
+  </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="simple-file">
+ <xsd:complexType>
+   <xsd:attribute name="key" type="xsd:string" use="required"/>
+   <xsd:attribute name="original-path" type="xsd:string" use="required"/>
+   <xsd:attribute name="package-path" type="xsd:string" use="required"/>
+  </xsd:complexType>
+</xsd:element>
+
+<xsd:element name="provide">
+ <xsd:complexType>
+   <xsd:attribute name="type" type="xsd:string" use="required"/><!-- @todo list allowed values? -->
+   <xsd:attribute name="name" type="xsd:string" use="required"/>
+   <xsd:attribute name="va;lue" type="xsd:string" use="required"/>
   </xsd:complexType>
 </xsd:element>
 
